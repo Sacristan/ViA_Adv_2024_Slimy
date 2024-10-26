@@ -16,7 +16,6 @@ public class AudioManager : MonoBehaviour
 
     void PlayVictorySFX()
     {
-        collectedSFX.Stop();
         _musicAudio.Stop();
         victorySFX.Play();
     }

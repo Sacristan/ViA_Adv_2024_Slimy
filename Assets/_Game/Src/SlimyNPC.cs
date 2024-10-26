@@ -3,10 +3,12 @@ using UnityEngine;
 public class SlimyNPC : MonoBehaviour
 {
     Animator animator;
+    AudioSource _audioSource;
 
     void Start()
     {
         animator = gameObject.GetComponentInChildren<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -28,5 +30,14 @@ public class SlimyNPC : MonoBehaviour
     void SetHappy(bool flag)
     {
         animator.SetBool("IsHappy", flag);
+
+        if (flag)
+        {
+            _audioSource.Play();
+        }
+        else
+        {
+            _audioSource.Stop();
+        }
     }
 }

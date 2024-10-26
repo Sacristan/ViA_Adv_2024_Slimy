@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public event System.Action OnGameWon;
+    public event System.Action OnAllMushroomsCollected;
     public event System.Action<Mushroom> OnMushroomCollected;
 
     List<Mushroom> _mushrooms;
@@ -31,7 +32,8 @@ public class GameManager : MonoBehaviour
 
         if (_mushrooms.Count <= 0)
         {
-            GameWon();
+            OnAllMushroomsCollected?.Invoke();
+            // GameWon();
         }
     }
 
