@@ -7,18 +7,22 @@ public class SlimyNPC : MonoBehaviour
     void Start()
     {
         animator = gameObject.GetComponentInChildren<Animator>();
-
     }
 
     void OnTriggerEnter(Collider other)
     {
-        // Debug.Log("Slimy personal space intruder: " + other.gameObject.name);
-        SetHappy(true);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            SetHappy(true);
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
-        SetHappy(false);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            SetHappy(false);
+        }
     }
 
     void SetHappy(bool flag)
