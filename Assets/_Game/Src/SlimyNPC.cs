@@ -2,17 +2,27 @@ using UnityEngine;
 
 public class SlimyNPC : MonoBehaviour
 {
-    [SerializeField] float waitBeforeHappy = 2f;
     Animator animator;
 
     void Start()
     {
         animator = gameObject.GetComponentInChildren<Animator>();
-        Invoke(nameof(BeHappy), waitBeforeHappy);
+
     }
 
-    void BeHappy()
+    void OnTriggerEnter(Collider other)
     {
-        animator.SetBool("IsHappy", true);
+        // Debug.Log("Slimy personal space intruder: " + other.gameObject.name);
+        SetHappy(true);
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        SetHappy(false);
+    }
+
+    void SetHappy(bool flag)
+    {
+        animator.SetBool("IsHappy", flag);
     }
 }
