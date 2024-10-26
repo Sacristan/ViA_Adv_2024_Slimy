@@ -30,6 +30,14 @@ public class GameManager : MonoBehaviour
         );
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
+
     public void Collected(Mushroom mushroom)
     {
         Debug.Log("Collected: " + mushroom.gameObject.name);
