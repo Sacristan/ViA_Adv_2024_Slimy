@@ -993,11 +993,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1672874642272002956, guid: f4fda5d76fcfa6848a7ad548fd467017,
-        type: 3}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4171964319615683462, guid: f4fda5d76fcfa6848a7ad548fd467017,
         type: 3}
       propertyPath: m_Name
