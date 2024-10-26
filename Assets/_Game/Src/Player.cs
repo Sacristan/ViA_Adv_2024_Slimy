@@ -10,10 +10,16 @@ public class Player : MonoBehaviour
     private void Start()
     {
         GameManager.instance.OnAllMushroomsCollected += OnMushroomsCollected;
+        GameManager.instance.OnSlimyHasBeenFed += OnSlimyHasBeenFed;
     }
 
     private void OnMushroomsCollected()
     {
         mushroomRepresentation.SetActive(true);
+    }
+
+    private void OnSlimyHasBeenFed()
+    {
+        mushroomRepresentation.SetActive(false);
     }
 }

@@ -7,9 +7,11 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public event System.Action OnGameWon;
     public event System.Action OnAllMushroomsCollected;
+    public event System.Action OnSlimyHasBeenFed;
     public event System.Action<Mushroom> OnMushroomCollected;
 
     List<Mushroom> _mushrooms;
+    bool hasGameBeenWon = false;
 
     private void Awake()
     {
@@ -37,10 +39,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SlimyHasBeenFed()
+    {
+        OnSlimyHasBeenFed?.Invoke();
+
+        Invoke(nameof(GameWon), 1.5f);
+        GameWon();
+    }
+
     void GameWon()
     {
-        Debug.Log("Game won!");
-        OnGameWon?.Invoke();
+        if (!hasGameBeenWon)
+        {
+            hasGameBeenWon = true;
+
+            Debug.Log("Game won!");
+            OnGameWon?.Invoke();
+        }
     }
 
 }

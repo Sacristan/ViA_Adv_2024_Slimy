@@ -7,6 +7,8 @@ public class SlimyNPC : MonoBehaviour
     bool hasAllMushroomsBeenCollected = false;
 
     [SerializeField] AudioSource squakyFX;
+    [SerializeField] AudioSource nomnomFX;
+
 
     void Start()
     {
@@ -26,6 +28,15 @@ public class SlimyNPC : MonoBehaviour
     public void OnPlayerLeftHappyZone()
     {
         SetHappy(false);
+    }
+
+    public void OnPlayerEnterFeedingZone()
+    {
+        if (hasAllMushroomsBeenCollected)
+        {
+            nomnomFX.Play();
+            GameManager.instance.SlimyHasBeenFed();
+        }
     }
 
     void SetHappy(bool flag)
