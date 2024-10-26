@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class GameManager : MonoBehaviour
 
     List<Mushroom> _mushrooms;
     bool hasGameBeenWon = false;
+
+    [SerializeField] float victoryDelayTime = 1.5f;
+    [SerializeField] float gameWonTimeRestartLevel = 3f;
 
     private void Awake()
     {
@@ -43,8 +47,7 @@ public class GameManager : MonoBehaviour
     {
         OnSlimyHasBeenFed?.Invoke();
 
-        Invoke(nameof(GameWon), 1.5f);
-        GameWon();
+        Invoke(nameof(GameWon), victoryDelayTime);
     }
 
     void GameWon()
@@ -55,7 +58,14 @@ public class GameManager : MonoBehaviour
 
             Debug.Log("Game won!");
             OnGameWon?.Invoke();
+
+            Invoke(nameof(RestartGame), gameWonTimeRestartLevel);
         }
+    }
+
+    void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 }
