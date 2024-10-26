@@ -1,30 +1,31 @@
+using System;
 using UnityEngine;
 
 public class SlimyNPC : MonoBehaviour
 {
     Animator animator;
-    AudioSource _audioSource;
+    bool hasAllMushroomsBeenCollected = false;
+
+    [SerializeField] AudioSource squakyFX;
 
     void Start()
     {
         animator = gameObject.GetComponentInChildren<Animator>();
-        _audioSource = GetComponent<AudioSource>();
+
+        GameManager.instance.OnAllMushroomsCollected += OnAllMushroomsCollected;
     }
 
-    void OnTriggerEnter(Collider other)
+    public void OnPlayerEnteredHappyZone()
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (hasAllMushroomsBeenCollected)
         {
             SetHappy(true);
         }
     }
 
-    void OnTriggerExit(Collider other)
+    public void OnPlayerLeftHappyZone()
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            SetHappy(false);
-        }
+        SetHappy(false);
     }
 
     void SetHappy(bool flag)
@@ -33,11 +34,16 @@ public class SlimyNPC : MonoBehaviour
 
         if (flag)
         {
-            _audioSource.Play();
+            squakyFX.Play();
         }
         else
         {
-            _audioSource.Stop();
+            squakyFX.Stop();
         }
+    }
+
+    private void OnAllMushroomsCollected()
+    {
+        hasAllMushroomsBeenCollected = true;
     }
 }
